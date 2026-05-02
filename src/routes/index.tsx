@@ -1,50 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import heroImg from "@/assets/hero-coffee.jpg";
-import espresso from "@/assets/espresso.jpg";
-import cappuccino from "@/assets/cappuccino.jpg";
-import latte from "@/assets/latte.jpg";
-import iced from "@/assets/iced.jpg";
+import { COFFEES, FILTERS, HERO_IMG, type Coffee } from "@/data/coffees";
 import arabic from "@/assets/arabic.jpg";
 import turkish from "@/assets/turkish.jpg";
-import mocha from "@/assets/mocha.jpg";
-import macchiato from "@/assets/macchiato.jpg";
+import latte from "@/assets/latte.jpg";
+import cappuccino from "@/assets/cappuccino.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
-
-type Coffee = {
-  id: string;
-  name: string;
-  nameEn: string;
-  desc: string;
-  price: number;
-  category: "hot" | "cold" | "specialty";
-  img: string;
-  badge?: string;
-};
-
-const COFFEES: Coffee[] = [
-  { id: "arabic", name: "قهوة عربية", nameEn: "Arabic Coffee", desc: "هيل، زعفران، وحبوب محمصة على الطريقة الأصيلة.", price: 18, category: "specialty", img: arabic, badge: "الأكثر طلباً" },
-  { id: "turkish", name: "قهوة تركية", nameEn: "Turkish Coffee", desc: "مطحونة ناعمة، رغوة كثيفة، ونكهة عميقة.", price: 16, category: "specialty", img: turkish },
-  { id: "espresso", name: "إسبريسو", nameEn: "Espresso", desc: "جرعة مركّزة من حبوب عربيكا مختارة.", price: 12, category: "hot" },
-  { id: "cappuccino", name: "كابتشينو", nameEn: "Cappuccino", desc: "إسبريسو، حليب مبخّر، ورغوة حريرية.", price: 20, category: "hot", img: cappuccino, badge: "كلاسيكي" },
-  { id: "latte", name: "لاتيه", nameEn: "Caffè Latte", desc: "حليب ناعم يلتقي بإسبريسو دافئ.", price: 22, category: "hot", img: latte },
-  { id: "mocha", name: "موكا", nameEn: "Mocha", desc: "شوكولاتة بلجيكية، إسبريسو، وكريمة مخفوقة.", price: 25, category: "hot", img: mocha },
-  { id: "macchiato", name: "ماكياتو كراميل", nameEn: "Caramel Macchiato", desc: "طبقات من الحليب والكراميل وإسبريسو غني.", price: 24, category: "hot", img: macchiato },
-  { id: "iced", name: "آيس كولد برو", nameEn: "Iced Cold Brew", desc: "منقوع 18 ساعة، نكهة سلسة ومنعشة.", price: 23, category: "cold", img: iced, badge: "صيفي" },
-];
-
-// Espresso uses shared image
-COFFEES[2].img = espresso;
-
-const FILTERS: { id: "all" | Coffee["category"]; label: string }[] = [
-  { id: "all", label: "الكل" },
-  { id: "hot", label: "ساخنة" },
-  { id: "cold", label: "باردة" },
-  { id: "specialty", label: "اختيارات الشيف" },
-];
 
 type CartItem = { id: string; qty: number };
 
@@ -130,7 +94,7 @@ function Index() {
       <section id="top" className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={heroImg}
+            src={HERO_IMG}
             alt="فنجان قهوة بُنّي ساخن"
             className="w-full h-full object-cover opacity-40"
             width={1600}
@@ -352,10 +316,10 @@ function CoffeeCard({ coffee, onAdd, onOrder, delay }: { coffee: Coffee; onAdd: 
       </div>
       <div className="p-6">
         <div className="flex items-start justify-between mb-2">
-          <div>
-            <h3 className="text-xl font-bold">{coffee.name}</h3>
+          <Link to="/coffee/$id" params={{ id: coffee.id }} className="group/link">
+            <h3 className="text-xl font-bold group-hover/link:text-primary transition-colors">{coffee.name}</h3>
             <p className="text-xs text-muted-foreground tracking-wider">{coffee.nameEn}</p>
-          </div>
+          </Link>
           <div className="text-left">
             <div className="text-2xl font-bold text-gradient-gold">{coffee.price}</div>
             <div className="text-[10px] text-muted-foreground">ر.س</div>
@@ -364,12 +328,21 @@ function CoffeeCard({ coffee, onAdd, onOrder, delay }: { coffee: Coffee; onAdd: 
         <p className="text-sm text-muted-foreground leading-relaxed mb-5 min-h-[2.5rem]">
           {coffee.desc}
         </p>
-        <button
-          onClick={onOrder}
-          className="w-full py-3 bg-secondary hover:bg-gradient-gold hover:text-primary-foreground rounded-full font-bold text-sm transition-all"
-        >
-          اطلب الآن
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={onOrder}
+            className="flex-1 py-3 bg-secondary hover:bg-gradient-gold hover:text-primary-foreground rounded-full font-bold text-sm transition-all"
+          >
+            اطلب الآن
+          </button>
+          <Link
+            to="/coffee/$id"
+            params={{ id: coffee.id }}
+            className="px-4 py-3 border border-border rounded-full text-sm hover:border-primary hover:text-primary transition-all flex items-center"
+          >
+            التفاصيل
+          </Link>
+        </div>
       </div>
     </article>
   );
