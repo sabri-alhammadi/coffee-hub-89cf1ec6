@@ -316,10 +316,10 @@ function CoffeeCard({ coffee, onAdd, onOrder, delay }: { coffee: Coffee; onAdd: 
       </div>
       <div className="p-6">
         <div className="flex items-start justify-between mb-2">
-          <div>
-            <h3 className="text-xl font-bold">{coffee.name}</h3>
+          <Link to="/coffee/$id" params={{ id: coffee.id }} className="group/link">
+            <h3 className="text-xl font-bold group-hover/link:text-primary transition-colors">{coffee.name}</h3>
             <p className="text-xs text-muted-foreground tracking-wider">{coffee.nameEn}</p>
-          </div>
+          </Link>
           <div className="text-left">
             <div className="text-2xl font-bold text-gradient-gold">{coffee.price}</div>
             <div className="text-[10px] text-muted-foreground">ر.س</div>
@@ -328,12 +328,21 @@ function CoffeeCard({ coffee, onAdd, onOrder, delay }: { coffee: Coffee; onAdd: 
         <p className="text-sm text-muted-foreground leading-relaxed mb-5 min-h-[2.5rem]">
           {coffee.desc}
         </p>
-        <button
-          onClick={onOrder}
-          className="w-full py-3 bg-secondary hover:bg-gradient-gold hover:text-primary-foreground rounded-full font-bold text-sm transition-all"
-        >
-          اطلب الآن
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={onOrder}
+            className="flex-1 py-3 bg-secondary hover:bg-gradient-gold hover:text-primary-foreground rounded-full font-bold text-sm transition-all"
+          >
+            اطلب الآن
+          </button>
+          <Link
+            to="/coffee/$id"
+            params={{ id: coffee.id }}
+            className="px-4 py-3 border border-border rounded-full text-sm hover:border-primary hover:text-primary transition-all flex items-center"
+          >
+            التفاصيل
+          </Link>
+        </div>
       </div>
     </article>
   );
