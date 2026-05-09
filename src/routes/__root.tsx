@@ -31,11 +31,15 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "حكاية فنجان — Hekayet Funjan Coffee House" },
       { name: "description", content: "حكاية فنجان — مقهى متخصص يقدم أجود أنواع القهوة العربية والعالمية. اطلب الآن." },
-      { property: "og:title", content: "حكاية فنجان — Hekayet Funjan" },
-      { property: "og:description", content: "أجود أنواع القهوة العربية والعالمية، تُحكى في كل فنجان." },
+      { property: "og:title", content: "حكاية فنجان — Hekayet Funjan Coffee House" },
+      { property: "og:description", content: "حكاية فنجان — مقهى متخصص يقدم أجود أنواع القهوة العربية والعالمية. اطلب الآن." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "حكاية فنجان — Hekayet Funjan Coffee House" },
+      { name: "twitter:description", content: "حكاية فنجان — مقهى متخصص يقدم أجود أنواع القهوة العربية والعالمية. اطلب الآن." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/05c9ae08-2633-4b6b-97bc-e21e4c25ac88/id-preview-f6881a2d--64ea5efc-4756-4aea-817e-a2c91445be94.lovable.app-1777759480968.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/05c9ae08-2633-4b6b-97bc-e21e4c25ac88/id-preview-f6881a2d--64ea5efc-4756-4aea-817e-a2c91445be94.lovable.app-1777759480968.png" },
     ],
     links: [
       {
